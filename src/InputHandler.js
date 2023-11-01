@@ -26,6 +26,9 @@ export default class InputHandler {
       if (event.key === 'p') {
         this.game.debug = !this.game.debug
       }
+      if (event.key === '1' || event.key === '2' || event.key === '3' || event.key === '4' || event.key === '5') {
+        this.game.player.currentWeapon = event.key
+      }
     })
 
     window.addEventListener('keyup', (event) => {
@@ -41,6 +44,8 @@ export default class InputHandler {
 
     window.addEventListener('mousedown', (event) => {
       this.game.player.shoot(this.mouseX, this.mouseY)
+      // this.game.player.click(this.mouseX, this.mouseY)
     })
+
   }
 }

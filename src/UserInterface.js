@@ -16,8 +16,14 @@ export default class UserInterface {
     context.textAlign = 'left'
     context.font = `${this.fontSize}px ${this.fontFamily}`
     context.fillText(`Lives: ${this.game.player.lives}`, 20, 30)
-    context.fillText(`Ammo: ${this.game.player.ammo}`, 20, 60)
-    context.fillText(`Time: ${(this.game.gameTime * 0.001).toFixed(1)}`, 20, 90)
+    context.fillText(`Ammo: ${this.game.player.displayAmmo}`, 20, 60)
+    context.fillText(`Round: ${this.game.round}`, 20, 90)
+    context.fillText(`Time: ${(this.game.gameTime * 0.001).toFixed(1)}`, 20, 120)
+    if (this.game.quadTimer > this.game.gameTime) {
+      context.fillStyle = "#ff00ff"
+      context.fillText(`QUAD DMG: ${((this.game.quadTimer - this.game.gameTime) * 0.001).toFixed(0)}`, this.game.width / 2 - 120, this.game.height / 3)
+      context.fillStyle = this.color
+    }
 
     if (this.game.gameOver) {
       context.textAlign = 'center'

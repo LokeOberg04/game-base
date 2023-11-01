@@ -1,10 +1,14 @@
 import Projectile from './Projectile.js'
+import RailGun from './RailGun.js'
+import RocketLauncher from './RocketLauncher.js'
+import Shotgun from './Shotgun.js'
+import Click from './Click.js'
 
 export default class Player {
   constructor(game) {
     this.game = game
     this.width = 32
-    this.height = 64
+    this.height = 32
     this.x = this.game.width / 2 - this.width / 2
     this.y = this.game.height / 2 - this.height / 2
 
@@ -14,17 +18,36 @@ export default class Player {
     this.speedY = 0
     this.maxSpeed = 6
 
-    this.maxAmmo = 20
-    this.ammo = 20
-    this.ammoTimer = 0
+    this.maxAmmo = 2000
+    this.ammo = 10
+    this.ammoTimer = 1
     this.ammoInterval = 500
+    this.shotgunAmmo = 100
+    this.railGunAmmo = 100
+    this.rocketLauncherAmmo = 100
+    this.displayAmmo = 0
 
-    this.lives = 10
+    this.currentWeapon = 1
+    this.lives = 3
+    this.damage = 1
   }
 
   update(deltaTime) {
+    if (this.currentWeapon == 1) {
+      this.displayAmmo = this.ammo
+    } else if (this.currentWeapon == 2) {
+      this.displayAmmo = this.shotgunAmmo
+    } else if (this.currentWeapon == 3) {
+      this.displayAmmo = this.railGunAmmo
+    } else if (this.currentWeapon == 4) {
+      this.displayAmmo = this.rocketLauncherAmmo
+    }
     if (this.lives <= 0) {
       this.game.gameOver = true
+    }
+
+    if (this.game.keys.includes('mousedown')) {
+      this.game.player.shoot(this.mouseX, this.mouseY)
     }
 
     if (this.game.keys.includes('ArrowLeft') || this.game.keys.includes('a')) {
@@ -49,8 +72,12 @@ export default class Player {
       this.speedY = 0
     }
 
-    this.y += this.speedY
-    this.x += this.speedX
+    if (this.y + this.speedY < this.game.height - 26 && this.y + this.speedY > -6) {
+      this.y += this.speedY
+    }
+    if (this.x + this.speedX < this.game.width - 26 && this.x + this.speedX > -6) {
+      this.x += this.speedX
+    }
 
     if (this.ammoTimer > this.ammoInterval && this.ammo < this.maxAmmo) {
       this.ammoTimer = 0
@@ -92,25 +119,104 @@ export default class Player {
     })
   }
 
-  shoot(mouseX, mouseY) {
+  click(mouseX, mouseY) {
     // get angle between player and mouse
     const angle = Math.atan2(
       mouseY - (this.y + this.height / 2),
       mouseX - (this.x + this.width / 2)
     )
 
-    if (this.ammo > 0) {
-      this.ammo--
-      this.projectiles.push(
-        new Projectile(
-          this.game,
-          this.x + this.width / 2,
-          this.y + this.height / 2,
-          angle
-        )
+    this.projectiles.push(
+      new Click(
+        this.game,
+        mouseX,
+        mouseY,
+        0
       )
-    } else {
-      console.log('out of ammo')
+    )
+  }
+
+
+  shoot(mouseX, mouseY) {
+    // get angle between player and mouse
+    const angle = Math.atan2(
+      mouseY - (this.y + this.height / 2),
+      mouseX - (this.x + this.width / 2)
+    )
+    if (this.currentWeapon == 1) {
+      if (this.ammo > 0) {
+        this.ammo--
+        this.projectiles.push(
+          new Projectile(
+            this.game,
+            this.x + this.width / 2,
+            this.y + this.height / 2,
+            angle
+          )
+        )
+      } else {
+        console.log('out of ammo')
+      }
+    } else if (this.currentWeapon == 2) {
+      if (this.shotgunAmmo > 0) {
+        this.shotgunAmmo--
+        this.projectiles.push(
+          new Shotgun(
+            this.game,
+            this.x + this.width / 2,
+            this.y + this.height / 2,
+            angle - .15
+          ),
+          new Shotgun(
+            this.game,
+            this.x + this.width / 2,
+            this.y + this.height / 2,
+            angle
+          ),
+          new Shotgun(
+            this.game,
+            this.x + this.width / 2,
+            this.y + this.height / 2,
+            angle + .15
+          )
+        )
+      } else {
+        console.log('out of ammo')
+      }
+    } else if (this.currentWeapon == 3) {
+      if (this.railGunAmmo > 0) {
+        this.railGunAmmo--
+        this.projectiles.push(
+          new RailGun(
+            this.game,
+            this.x + this.width / 2,
+            this.y + this.height / 2,
+            angle
+          )
+        )
+      } else {
+        console.log('out of ammo')
+      }
+    } else if (this.currentWeapon == 4) {
+      if (this.rocketLauncherAmmo > 0) {
+        this.rocketLauncherAmmo--
+        this.projectiles.push(
+          new RocketLauncher(
+            this.game,
+            this.x + this.width / 2,
+            this.y + this.height / 2,
+            angle
+          ),
+          new Click(
+            this.game,
+            mouseX,
+            mouseY,
+            0
+          )
+        )
+      } else {
+        console.log('out of ammo')
+      }
     }
   }
 }
