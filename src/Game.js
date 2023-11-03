@@ -30,7 +30,12 @@ export default class Game {
     this.staticTimer = 0
     this.round = 1
     this.oldRound = 1
-    this.quadTimer = 0;
+    this.quadTimer = 0
+    this.ammoMsgTimer = 0
+    this.mb1 = 0
+    this.defaultFireRate = 10
+    this.defaultTimer = 10
+    this.popupMsg = "Hi"
 
     this.enemies.push(new Pumpkin(this, 0, 0))
     this.player = new Player(this)
@@ -46,9 +51,17 @@ export default class Game {
         this.oldRound = this.round
       }
     }
-
     if (this.gameOver) {
       return
+    }
+
+    if (this.mb1 == 1) {
+      if (this.defaultTimer > this.defaultFireRate) {
+        this.player.shoot(this.input.mouseX, this.input.mouseY)
+        this.defaultTimer = 0
+      } else {
+        this.defaultTimer++
+      }
     }
 
     if (this.quadTimer > this.gameTime) {
@@ -134,7 +147,8 @@ export default class Game {
         if (pickup.type === 'quad') {
           this.quadTimer = this.gameTime + 30000
         } else if (pickup.type === 'weapon') {
-          console.log("YOU GOT A NEW WEAPON :OOOOO\n weapon: " + Math.ceil(Math.random() * 5))
+          this.ammoMsgTimer = this.gameTime + 3000
+          pickup.randomGun()
         }
         pickup.markedForDeletion = true
       }
@@ -207,7 +221,7 @@ export default class Game {
             projectile.markedForDeletion = true
           } else if (enemy.type === 'static' && projectile.type === 'click') {
             enemy.markedForDeletion = true
-          } else if (enemy.type === 'creep') {
+          } else if (enemy.type === 'creep' && projectile.type !== 'click') {
             if (enemy.lives > projectile.damage * this.player.damage) {
               enemy.lives -= projectile.damage * this.player.damage
             } else {

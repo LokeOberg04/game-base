@@ -22,9 +22,9 @@ export default class Player {
     this.ammo = 10
     this.ammoTimer = 1
     this.ammoInterval = 500
-    this.shotgunAmmo = 100
-    this.railGunAmmo = 100
-    this.rocketLauncherAmmo = 100
+    this.shotgunAmmo = 10
+    this.railGunAmmo = 10
+    this.rocketLauncherAmmo = 10
     this.displayAmmo = 0
 
     this.currentWeapon = 1

@@ -6,6 +6,12 @@ export default class UserInterface {
     this.color = 'white'
   }
 
+  ammoPickup(message) {
+    context.fillStyle = "#00ff00"
+    context.fillText(message, this.game.width / 2 - 120, this.game.height / 3 - 20)
+    context.fillStyle = this.color
+  }
+
   draw(context) {
     context.save()
     context.fillStyle = this.color
@@ -22,6 +28,12 @@ export default class UserInterface {
     if (this.game.quadTimer > this.game.gameTime) {
       context.fillStyle = "#ff00ff"
       context.fillText(`QUAD DMG: ${((this.game.quadTimer - this.game.gameTime) * 0.001).toFixed(0)}`, this.game.width / 2 - 120, this.game.height / 3)
+      context.fillStyle = this.color
+    }
+
+    if (this.game.ammoMsgTimer > this.game.gameTime) {
+      context.fillStyle = "#00ff00"
+      context.fillText(this.game.popupMsg, this.game.width / 2 - 120, this.game.height / 3 - 20)
       context.fillStyle = this.color
     }
 

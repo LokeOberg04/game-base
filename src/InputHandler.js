@@ -43,9 +43,17 @@ export default class InputHandler {
     })
 
     window.addEventListener('mousedown', (event) => {
-      this.game.player.shoot(this.mouseX, this.mouseY)
+      this.game.mb1 = 1
+      //this.game.player.shoot(this.mouseX, this.mouseY)
       // this.game.player.click(this.mouseX, this.mouseY)
     })
+
+    window.addEventListener('mouseup', (event) => {
+      this.game.mb1 = 0
+      //this.game.player.shoot(this.mouseX, this.mouseY)
+      // this.game.player.click(this.mouseX, this.mouseY)
+    })
+
 
   }
 }

@@ -12,4 +12,19 @@ export default class Weapon extends Pickup {
     this.color = '#00ff00'
     this.type = 'weapon'
   }
+
+  randomGun() {
+    let gun = Math.ceil(Math.random() * 3)
+    if (gun == 1) {
+      this.game.player.shotgunAmmo += 20
+      this.game.popupMsg = "+20 shotgun ammo"
+    } else if (gun == 2) {
+      this.game.player.railGunAmmo += 20
+      this.game.popupMsg = "+20 railgun ammo"
+    } else {
+      this.game.player.rocketLauncherAmmo += 20
+      this.game.popupMsg = "+20 rockets"
+    }
+  }
+
 }
