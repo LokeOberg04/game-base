@@ -44,7 +44,8 @@ export default class InputHandler {
 
     window.addEventListener('mousedown', (event) => {
       this.game.mb1 = 1
-      //this.game.player.shoot(this.mouseX, this.mouseY)
+      this.game.player.shoot(this.mouseX, this.mouseY)
+      this.game.defaultTimer = 0
       // this.game.player.click(this.mouseX, this.mouseY)
     })
 

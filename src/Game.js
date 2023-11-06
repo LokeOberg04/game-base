@@ -34,7 +34,7 @@ export default class Game {
     this.ammoMsgTimer = 0
     this.mb1 = 0
     this.defaultFireRate = 10
-    this.defaultTimer = 10
+    this.defaultTimer = 0
     this.popupMsg = "Hi"
 
     this.enemies.push(new Pumpkin(this, 0, 0))
@@ -227,7 +227,9 @@ export default class Game {
             } else {
               enemy.markedForDeletion = true
             }
-            projectile.markedForDeletion = true
+            if (projectile.type !== 'explosion') {
+              projectile.markedForDeletion = true
+            }
           }
         }
       })
