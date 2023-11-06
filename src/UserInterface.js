@@ -81,11 +81,14 @@ export default class UserInterface {
           this.game.width / 5,
           this.game.height / 3 + 50
         ),
-        context.fillText(
-          'This lil fella is you ➜',
-          this.game.width / 5,
-          this.game.height / 3 + 150
-        ),
+        context.fillStyle = "#f00"
+      context.fillRect(this.game.width / 2 - 20, this.game.height / 3 + 2 + 115, 32, 32)
+      context.fillStyle = "#fff"
+      context.fillText(
+        'This lil fella is you ➜',
+        this.game.width / 5,
+        this.game.height / 3 + 150
+      ),
         context.fillStyle = "#f0f"
       context.fillRect(this.game.width / 2 + 50, this.game.height / 3 + 2 + 165, 32, 32)
       context.fillStyle = "#fff"
