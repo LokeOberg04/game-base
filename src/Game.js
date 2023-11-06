@@ -36,12 +36,17 @@ export default class Game {
     this.defaultFireRate = 10
     this.defaultTimer = 0
     this.popupMsg = "Hi"
+    this.start = false
 
     this.enemies.push(new Pumpkin(this, 0, 0))
     this.player = new Player(this)
   }
 
   update(deltaTime) {
+    if (this.gameOver || !this.start) {
+      return
+    }
+
     if (!this.gameOver) {
       this.gameTime += deltaTime
       this.round = 1 + Math.round((this.gameTime / 1000) / 10)
@@ -50,9 +55,6 @@ export default class Game {
         this.enemyInterval = 2000 / Math.pow(1.25, this.round)
         this.oldRound = this.round
       }
-    }
-    if (this.gameOver) {
-      return
     }
 
     if (this.mb1 == 1) {

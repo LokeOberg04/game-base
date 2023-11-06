@@ -47,6 +47,55 @@ export default class UserInterface {
       )
     }
 
+    if (!this.game.start) {
+      context.fillStyle = "#555"
+      context.fillRect(this.game.width / 5 - 50, this.game.height / 3 - 60, 1200, 450)
+      context.fillStyle = "#fff"
+      context.textAlign = 'left'
+      context.font = `50px ${this.fontFamily}`
+      context.fillText(
+        'Hello, welcome to quake but 2d and shit :з',
+        this.game.width / 5,
+        this.game.height / 3
+      ),
+        context.fillText(
+          'Use WASD to move',
+          this.game.width / 5,
+          this.game.height / 3 + 50
+        ),
+        context.fillText(
+          'Shoot enemies with left mouse button',
+          this.game.width / 5,
+          this.game.height / 3 + 100
+        ),
+        context.fillText(
+          'This lil fella is you ➜',
+          this.game.width / 5,
+          this.game.height / 3 + 150
+        ),
+        context.fillStyle = "#f0f"
+      context.fillRect(this.game.width / 2 + 50, this.game.height / 3 + 2 + 165, 32, 32)
+      context.fillStyle = "#fff"
+      context.fillText(
+        'This is quad damage ➜    walk over it to pick it up',
+        this.game.width / 5,
+        this.game.height / 3 + 200
+      ),
+        context.fillStyle = "#0f0"
+      context.fillRect(this.game.width / 2 + 50, this.game.height / 3 + 52 + 165, 32, 32)
+      context.fillStyle = "#fff"
+      context.fillText(
+        'This is an ammo box ➜    walk over it to pick it up',
+        this.game.width / 5,
+        this.game.height / 3 + 250
+      ),
+        context.fillText(
+          'Press p to start',
+          this.game.width / 5,
+          this.game.height / 3 + 350
+        )
+    }
+
     // debug
     if (this.game.debug) {
       context.font = `15px Arial`
