@@ -49,7 +49,7 @@ export default class UserInterface {
 
     if (!this.game.start) {
       context.fillStyle = "#555"
-      context.fillRect(this.game.width / 5 - 50, this.game.height / 3 - 60, 1200, 450)
+      context.fillRect(this.game.width / 5 - 50, this.game.height / 3 - 60, 1200, 500)
       context.fillStyle = "#fff"
       context.textAlign = 'left'
       context.font = `50px ${this.fontFamily}`
@@ -90,9 +90,14 @@ export default class UserInterface {
         this.game.height / 3 + 250
       ),
         context.fillText(
+          'Change weapon with 1-4',
+          this.game.width / 5,
+          this.game.height / 3 + 300
+        ),
+        context.fillText(
           'Press p to start',
           this.game.width / 5,
-          this.game.height / 3 + 350
+          this.game.height / 3 + 400
         )
     }
 
