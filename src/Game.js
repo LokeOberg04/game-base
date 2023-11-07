@@ -93,12 +93,12 @@ export default class Game {
       this.enemies.push(new creep(this, x, y))
       x = Math.random() * this.width
       y = Math.random() * this.height
-      if (Math.random() < 0.2) {
+      if (Math.random() < 0.05) {
         this.pickups.push(new Quad(this, x, y))
       } else {
         //       this.enemies.push(new Pumpkin(this, x, y))
       }
-      if (Math.random() < 0.2) {
+      if (Math.random() < 0.1) {
         this.pickups.push(new Weapon(this, x, y))
       }
       this.enemyTimer = 0
