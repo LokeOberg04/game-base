@@ -1,4 +1,5 @@
 import Enemy from './Enemy.js'
+import enemy from './assets/sprites/enemy.png'
 
 export default class creep extends Enemy {
   constructor(game, x, y) {
@@ -11,6 +12,9 @@ export default class creep extends Enemy {
     this.lives = 3
     this.color = 'green'
     this.type = 'creep'
+    const idleImage = new Image()
+    idleImage.src = enemy
+    this.image = idleImage
   }
 
   update(player) {
