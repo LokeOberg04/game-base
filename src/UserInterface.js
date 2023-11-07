@@ -77,7 +77,7 @@ export default class UserInterface {
           this.game.height / 3
         ),
         context.fillText(
-          'Change weapon with 1-4',
+          'Change weapon with [1]-[5]',
           this.game.width / 5,
           this.game.height / 3 + 50
         ),
