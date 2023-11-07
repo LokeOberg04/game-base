@@ -1,16 +1,16 @@
-export default class Projectile {
+export default class LightningGun {
   constructor(game, x, y, angle) {
     this.game = game
-    this.width = 10
+    this.width = 2000
     this.height = 4
     this.x = x
     this.y = y
     this.angle = angle
 
-    this.speed = 400
+    this.speed = 0
     this.damage = 1
     this.markedForDeletion = false
-    this.type = 'bullet'
+    this.type = 'lg'
   }
 
   update(deltaTime) {
@@ -31,7 +31,7 @@ export default class Projectile {
     context.save()
     context.translate(this.x, this.y)
     context.rotate(this.angle)
-    context.fillStyle = '#ff0'
+    context.fillStyle = '#0ff'
     context.fillRect(0, 0, this.width, this.height)
     context.restore()
   }

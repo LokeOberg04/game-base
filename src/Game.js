@@ -58,11 +58,13 @@ export default class Game {
     }
 
     if (this.mb1 == 1) {
-      if (this.defaultTimer > this.defaultFireRate) {
-        this.player.shoot(this.input.mouseX, this.input.mouseY)
-        this.defaultTimer = 0
-      } else {
-        this.defaultTimer++
+      if (this.player.currentWeapon !== '5') {
+        if (this.defaultTimer > this.defaultFireRate) {
+          this.player.shoot(this.input.mouseX, this.input.mouseY)
+          this.defaultTimer = 0
+        } else {
+          this.defaultTimer++
+        }
       }
     }
 
@@ -187,6 +189,22 @@ export default class Game {
         }
       }
       this.player.projectiles.forEach((projectile) => {
+        if (projectile.type === 'lg') {
+          projectile.x = this.player.x + this.player.width / 2
+          projectile.y = this.player.y + this.player.height / 2
+          const angle = Math.atan2(
+            this.input.mouseY - (this.player.y + this.player.height / 2),
+            this.input.mouseX - (this.player.x + this.player.width / 2)
+          )
+          projectile.angle = angle
+          this.player.LGAmmo -= 1
+          if (this.player.LGAmmo < 1) {
+            this.mb1 = 0
+          }
+          if (this.mb1 === 0) {
+            projectile.markedForDeletion = true
+          }
+        }
         this.player.projectiles.forEach((projectile2) => {
           if (this.checkCollision(projectile, projectile2)) {
             if (projectile.type === 'rocket' && projectile2.type === 'click') {
@@ -229,7 +247,7 @@ export default class Game {
             } else {
               enemy.markedForDeletion = true
             }
-            if (projectile.type !== 'explosion') {
+            if (projectile.type !== 'explosion' && projectile.type !== 'lg') {
               projectile.markedForDeletion = true
             }
           }

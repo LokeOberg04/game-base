@@ -1,6 +1,7 @@
 import Projectile from './Projectile.js'
 import RailGun from './RailGun.js'
 import RocketLauncher from './RocketLauncher.js'
+import LightningGun from './LightningGun.js'
 import Shotgun from './Shotgun.js'
 import Click from './Click.js'
 
@@ -22,9 +23,10 @@ export default class Player {
     this.ammo = 10
     this.ammoTimer = 1
     this.ammoInterval = 500
-    this.shotgunAmmo = 10
-    this.railGunAmmo = 10
-    this.rocketLauncherAmmo = 10
+    this.shotgunAmmo = 12
+    this.railGunAmmo = 13
+    this.rocketLauncherAmmo = 14
+    this.LGAmmo = 400
     this.displayAmmo = 0
 
     this.currentWeapon = 1
@@ -41,6 +43,8 @@ export default class Player {
       this.displayAmmo = this.railGunAmmo
     } else if (this.currentWeapon == 4) {
       this.displayAmmo = this.rocketLauncherAmmo
+    } else if (this.currentWeapon == 5) {
+      this.displayAmmo = this.LGAmmo
     }
     if (this.lives <= 0) {
       this.game.gameOver = true
@@ -202,6 +206,26 @@ export default class Player {
         this.rocketLauncherAmmo--
         this.projectiles.push(
           new RocketLauncher(
+            this.game,
+            this.x + this.width / 2,
+            this.y + this.height / 2,
+            angle
+          ),
+          new Click(
+            this.game,
+            mouseX,
+            mouseY,
+            0
+          )
+        )
+      } else {
+        console.log('out of ammo')
+      }
+    } else if (this.currentWeapon == 5) {
+      if (this.LGAmmo > 0) {
+        this.LGAmmo--
+        this.projectiles.push(
+          new LightningGun(
             this.game,
             this.x + this.width / 2,
             this.y + this.height / 2,
