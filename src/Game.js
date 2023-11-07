@@ -259,7 +259,6 @@ export default class Game {
   }
 
   draw(context) {
-    this.player.draw(context)
     this.enemies.forEach((enemy) => {
       enemy.draw(context)
     })
@@ -267,6 +266,7 @@ export default class Game {
       enemy.draw(context)
     })
     this.ui.draw(context)
+    this.player.draw(context)
   }
 
   checkCollision(object1, object2) {

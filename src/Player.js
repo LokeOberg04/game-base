@@ -4,6 +4,8 @@ import RocketLauncher from './RocketLauncher.js'
 import LightningGun from './LightningGun.js'
 import Shotgun from './Shotgun.js'
 import Click from './Click.js'
+import explosion from './assets/sprites/alexandro.png'
+
 
 export default class Player {
   constructor(game) {
@@ -32,6 +34,10 @@ export default class Player {
     this.currentWeapon = 1
     this.lives = 3
     this.damage = 1
+
+    const idleImage = new Image()
+    idleImage.src = explosion
+    this.image = idleImage
   }
 
   update(deltaTime) {
@@ -101,7 +107,15 @@ export default class Player {
 
   draw(context) {
     context.fillStyle = '#f00'
-    context.fillRect(this.x, this.y, this.width, this.height)
+    // context.fillRect(this.x, this.y, this.width, this.height)
+    context.drawImage(
+      this.image,
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    )
+
     if (this.game.debug) {
       context.strokeStyle = '#000'
       context.strokeRect(this.x, this.y, this.width, this.height)
