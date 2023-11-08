@@ -1,4 +1,5 @@
 import Enemy from './Enemy.js'
+import enemy from './assets/sprites/snigel.png'
 
 export default class Pumpkin extends Enemy {
   constructor(game, x, y) {
@@ -11,6 +12,9 @@ export default class Pumpkin extends Enemy {
     this.lives = 1
     this.color = 'orange'
     this.type = 'pumpkin'
+    const idleImage = new Image()
+    idleImage.src = enemy
+    this.image = idleImage
   }
 
   update(player) {

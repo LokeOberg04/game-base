@@ -237,7 +237,7 @@ export default class Game {
                 0
               ))
           }
-          if (enemy.type === 'pumpkin') {
+          if (enemy.type === 'pumpkin' && projectile.type !== 'lg') {
             projectile.markedForDeletion = true
           } else if (enemy.type === 'static' && projectile.type === 'click') {
             enemy.markedForDeletion = true

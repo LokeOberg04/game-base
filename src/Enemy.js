@@ -18,7 +18,7 @@ export default class Enemy {
   }
 
   draw(context) {
-    if (this.type === 'creep') {
+    if (this.type === 'creep' || this.type === 'pumpkin') {
       context.drawImage(
         this.image,
         this.x,

@@ -107,7 +107,7 @@ export default class Player {
 
   draw(context) {
     context.fillStyle = '#f00'
-    // context.fillRect(this.x, this.y, this.width, this.height)
+    context.fillRect(this.x, this.y, this.width, this.height)
     context.drawImage(
       this.image,
       this.x,

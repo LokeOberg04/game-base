@@ -1,8 +1,10 @@
+import rocket from './assets/sprites/rocket.png'
+
 export default class RocketLauncher {
   constructor(game, x, y, angle) {
     this.game = game
-    this.width = 8
-    this.height = 4
+    this.width = 82
+    this.height = 42
     this.x = x
     this.y = y
     this.angle = angle
@@ -11,6 +13,10 @@ export default class RocketLauncher {
     this.damage = 5
     this.markedForDeletion = false
     this.type = 'rocket'
+
+    const idleImage = new Image()
+    idleImage.src = rocket
+    this.image = idleImage
   }
 
   update(deltaTime) {
@@ -28,11 +34,18 @@ export default class RocketLauncher {
   }
 
   draw(context) {
-    context.save()
-    context.translate(this.x, this.y)
-    context.rotate(this.angle)
-    context.fillStyle = '#f00'
-    context.fillRect(0, 0, this.width, this.height)
+    // context.save()
+    // context.translate(this.x, this.y)
+    // context.rotate(this.angle)
+    // context.fillStyle = '#f00'
+    // context.fillRect(0, 0, this.width, this.height)
+    context.drawImage(
+      this.image,
+      this.x,
+      this.y,
+      this.width,
+      this.height
+    )
     context.restore()
   }
 }
