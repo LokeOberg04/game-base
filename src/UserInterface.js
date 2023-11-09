@@ -1,9 +1,26 @@
+import enemy from './assets/sprites/enemy.png'
+import ammoIMG from './assets/sprites/Ammobox.png'
+import quadIMG from './assets/sprites/quadDMG.png'
+
 export default class UserInterface {
   constructor(game) {
     this.game = game
     this.fontSize = 25
     this.fontFamily = 'Arial'
     this.color = 'white'
+
+    const idleImage = new Image()
+    idleImage.src = enemy
+    this.image = idleImage
+
+
+    const ammoImage = new Image()
+    ammoImage.src = ammoIMG
+    this.ammoBox = ammoImage
+
+    const quadImage = new Image()
+    quadImage.src = quadIMG
+    this.quadBox = quadImage
   }
 
   ammoPickup(message) {
@@ -63,14 +80,21 @@ export default class UserInterface {
           this.game.width / 5,
           this.game.height / 3 - 100
         ),
-        context.fillStyle = "green"
-      context.fillRect(this.game.width / 2 - 30, this.game.height / 8 + 85, 32, 32)
-      context.fillStyle = "#fff"
+        //   context.fillStyle = "green"
+        // context.fillRect(this.game.width / 2 - 30, this.game.height / 8 + 85, 32, 32)
+        context.fillStyle = "#fff"
       context.fillText(
         'This is an enemy ➜',
         this.game.width / 5,
         this.game.height / 3 + -50
       ),
+        context.drawImage(
+          this.image,
+          this.game.width / 2 - 30,
+          this.game.height / 8 + 85,
+          32,
+          32,
+        ),
         context.fillText(
           'Shoot enemies with left mouse button',
           this.game.width / 5,
@@ -89,17 +113,31 @@ export default class UserInterface {
         this.game.width / 5,
         this.game.height / 3 + 150
       ),
-        context.fillStyle = "#f0f"
-      context.fillRect(this.game.width / 2 + 50, this.game.height / 3 + 2 + 165, 32, 32)
-      context.fillStyle = "#fff"
+        //   context.fillStyle = "#f0f"
+        // context.fillRect(this.game.width / 2 + 50, this.game.height / 3 + 2 + 165, 32, 32)
+        context.drawImage(
+          this.quadBox,
+          this.game.width / 2 + 50,
+          this.game.height / 3 + 167,
+          32,
+          32,
+        ),
+        context.fillStyle = "#fff"
       context.fillText(
         'This is quad damage ➜    walk over it to pick it up',
         this.game.width / 5,
         this.game.height / 3 + 200
       ),
-        context.fillStyle = "#0f0"
-      context.fillRect(this.game.width / 2 + 50, this.game.height / 3 + 67, 32, 32)
-      context.fillStyle = "#fff"
+        //   context.fillStyle = "#0f0"
+        // context.fillRect(this.game.width / 2 + 50, this.game.height / 3 + 67, 32, 32)
+        context.drawImage(
+          this.ammoBox,
+          this.game.width / 2 + 50,
+          this.game.height / 3 + 67,
+          32,
+          32,
+        ),
+        context.fillStyle = "#fff"
       context.fillText(
         'This is an ammo box ➜    walk over it to pick it up',
         this.game.width / 5,

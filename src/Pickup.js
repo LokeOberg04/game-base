@@ -9,8 +9,18 @@ export default class Pickup {
   }
 
   draw(context) {
-    context.fillStyle = this.color
-    context.fillRect(this.x, this.y, this.width, this.height)
+    if (this.type === 'weapon' || this.type === 'quad') {
+      context.drawImage(
+        this.image,
+        this.x,
+        this.y,
+        this.width,
+        this.height
+      )
+    } else {
+      context.fillStyle = this.color
+      context.fillRect(this.x, this.y, this.width, this.height)
+    }
 
     if (this.game.debug) {
       context.strokeRect(this.x, this.y, this.width, this.height)

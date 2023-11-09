@@ -1,16 +1,21 @@
 import Pickup from './Pickup'
+import ammo from './assets/sprites/Ammobox.png'
 
 export default class Weapon extends Pickup {
   constructor(game, x, y) {
     super(game)
-    this.width = 16
-    this.height = 16
+    this.width = 32
+    this.height = 32
     this.x = x
     this.y = y
     this.speed = 0
     this.lives = 1
     this.color = '#00ff00'
     this.type = 'weapon'
+
+    const idleImage = new Image()
+    idleImage.src = ammo
+    this.image = idleImage
   }
 
   randomGun() {
