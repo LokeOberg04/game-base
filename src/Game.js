@@ -7,6 +7,7 @@ import creep from './creep.js'
 import Quad from './Quad.js'
 import Weapon from './Weapon.js'
 import Static from './Static.js'
+import quakeMap from './assets/sprites/quakeMap.jpg'
 import Explosion from './Explosion.js'
 export default class Game {
   constructor(width, height, canvasPosition) {
@@ -37,6 +38,10 @@ export default class Game {
     this.defaultTimer = 0
     this.popupMsg = "Hi"
     this.start = false
+
+    const idleImage = new Image()
+    idleImage.src = quakeMap
+    this.background = idleImage
 
     this.enemies.push(new Pumpkin(this, 0, 0))
     this.player = new Player(this)
@@ -259,6 +264,17 @@ export default class Game {
   }
 
   draw(context) {
+    context.drawImage(
+      this.background,
+      0,
+      0,
+      this.width,
+      this.height
+    )
+    context.globalAlpha = 0.6
+    context.fillStyle = "#000"
+    context.fillRect(0, 0, this.width, this.height)
+    context.globalAlpha = 1
     this.enemies.forEach((enemy) => {
       enemy.draw(context)
     })
